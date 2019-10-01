@@ -32,5 +32,5 @@ instance FromJSON Label where
     parseJSON t = Label <$> parseJSON t
 
 -- | 'withEnv' specialized for 'Label'
-withLabel :: (MonadLog Label m) => Label -> m a -> m a
+withLabel :: (MonadLog Label v m) => Label -> m a -> m a
 withLabel = withEnv

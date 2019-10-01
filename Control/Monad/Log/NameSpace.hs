@@ -39,9 +39,9 @@ instance FromJSON NameSpace where
     parseJSON t = NameSpace <$> parseJSON t
 
 -- | use a new 'NameSpace' within m.
-withNameSpace :: (MonadLog NameSpace m) => NameSpace -> m a -> m a
+withNameSpace :: (MonadLog NameSpace v m) => NameSpace -> m a -> m a
 withNameSpace = withEnv
 
 -- | push a 'Text' name to the front of m's 'NameSpace'.
-subNameSpace :: (MonadLog NameSpace m) => Text -> m a -> m a
+subNameSpace :: (MonadLog NameSpace v m) => Text -> m a -> m a
 subNameSpace sub = localEnv (pushNameSpace sub)

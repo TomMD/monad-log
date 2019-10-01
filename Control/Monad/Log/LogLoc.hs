@@ -70,5 +70,5 @@ myLogLoc :: Q Exp
 myLogLoc = [| $(TH.location >>= liftLogLoc) |]
 
 -- | 'withEnv' specialized for 'LogLoc'
-withLogLoc :: (MonadLog LogLoc m) => LogLoc -> m a -> m a
+withLogLoc :: (MonadLog LogLoc v m) => LogLoc -> m a -> m a
 withLogLoc = withEnv

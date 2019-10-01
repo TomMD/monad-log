@@ -42,10 +42,10 @@ library
   -- other-modules:       
   -- other-extensions:    
   build-depends:        base >=4.6 && <5
-                    ,   fast-logger >=2.4.5 && <2.5
+                    ,   fast-logger >=3 && <4
                     ,   monad-control >=0.3 && <1.1
                     ,   lifted-base 
-                    ,   exceptions >=0.6 && <0.9
+                    ,   exceptions >=0.6 && <0.12
                     ,   bytestring
                     ,   text
                     ,   text-show
