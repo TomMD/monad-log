@@ -39,11 +39,11 @@ myLogThreadId :: (MonadIO m) => m LogThreadId
 myLogThreadId = liftIO $ fmap (LogThreadId . T.pack . show) myThreadId
 
 -- | 'withEnv' specialized for 'LogThreadId'
-withLogThreadId :: (MonadLog LogThreadId v m) => LogThreadId -> m a -> m a
+withLogThreadId :: (MonadLog LogThreadId m) => LogThreadId -> m a -> m a
 withLogThreadId = withEnv
 
 -- | obtain 'LogThreadId' and change logging environment.
-withMyLogThreadId :: (MonadLog LogThreadId v m) => m a -> m a
+withMyLogThreadId :: (MonadLog LogThreadId m) => m a -> m a
 withMyLogThreadId ma = do
     tid <-  myLogThreadId
     withLogThreadId tid ma
