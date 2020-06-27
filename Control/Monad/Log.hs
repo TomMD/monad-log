@@ -2,7 +2,6 @@
 {-# LANGUAGE ExistentialQuantification #-}
 {-# LANGUAGE FlexibleContexts #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE MultiParamTypeClasses #-}
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE UndecidableInstances #-}
 {-# LANGUAGE RankNTypes #-}
@@ -303,10 +302,13 @@ instance Monad m => Monad (LogT env m) where
         let LogT f' = f a
         f' lgr
     {-# INLINE (>>=) #-}
+#if MIN_VERSION_base(4,13,0)
+instance Fail.MonadFail m => MonadFail (LogT env m) where
     fail msg = lift (fail msg)
     {-# INLINE fail #-}
-
-#if MIN_VERSION_base(4,9,0)
+#elif MIN_VERSION_base(4,9,0)
+    fail msg = lift (fail msg)
+    {-# INLINE fail #-}
 instance Fail.MonadFail m => Fail.MonadFail (LogT env m) where
     fail msg = lift (Fail.fail msg)
     {-# INLINE fail #-}
